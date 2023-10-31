@@ -12,3 +12,4 @@ def fizzbuzz():
             print("{}".format(number), end="")
         if (number < 100):
             print(" ", end="")
+    print(" ", end="")

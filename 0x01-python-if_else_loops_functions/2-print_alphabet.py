@@ -2,4 +2,4 @@
 
 for iterator in range(97, 123):
     char = chr(iterator)
-    print(char, end="")
+    print("{}".format(char), end="")

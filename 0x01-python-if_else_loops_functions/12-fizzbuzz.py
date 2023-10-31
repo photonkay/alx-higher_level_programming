@@ -11,5 +11,3 @@ def fizzbuzz():
         if (number < 100):
             print(" ", end="")
     print()
-
-fizzbuzz()

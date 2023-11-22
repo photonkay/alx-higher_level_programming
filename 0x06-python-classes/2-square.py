@@ -2,6 +2,7 @@
 
 """Continuing 1-square.py"""
 
+
 class Square:
     """Defines a square"""
 

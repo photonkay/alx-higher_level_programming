@@ -20,8 +20,8 @@ class Square:
 
     @size.setter
     def size(self, value):
-        """Sets the value of self
-        
+        """Sets the value of self.__size
+
         Args:
             value (int): this is the dimension
         """

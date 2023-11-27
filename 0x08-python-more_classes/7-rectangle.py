@@ -5,7 +5,7 @@
 
 class Rectangle:
     """Defines a rectangle's width
-    
+
     Args:
         number_of_instances (int): number of objects created
         print_symbol (any): used as symbol for string representation

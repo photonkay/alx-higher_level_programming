@@ -5,7 +5,7 @@
 
 class Rectangle:
     """Defines a rectangle's width
-    
+
     Args:
         number_of_instances (int): number of objects created
         print_symbol (any): used as symbol for string representation
@@ -106,7 +106,7 @@ class Rectangle:
         """
         if not isinstance(rect_1, Rectangle):
             raise TypeError("rect_1 must be an instance of Rectangle")
-    
+
         if not isinstance(rect_2, Rectangle):
             raise TypeError("rect_2 must be an instance of Rectangle")
 

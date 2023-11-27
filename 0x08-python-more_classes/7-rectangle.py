@@ -8,9 +8,11 @@ class Rectangle:
     
     Args:
         number_of_instances (int): number of objects created
+        print_symbol (any): used as symbol for string representation
     """
 
     number_of_instances = 0
+    print_symbol = "#"
 
     def __init__(self, width=0, height=0):
         """Set the width and height of the rectangle
@@ -80,7 +82,7 @@ class Rectangle:
         rect = []
         for i in range(self.__height):
             for j in range(self.__width):
-                rect.append("#")
+                rect.append(str(self.print_symbol))
             if i != self.__height - 1:
                 rect.append("\n")
         return ("".join(rect))

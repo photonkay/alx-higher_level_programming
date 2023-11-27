@@ -1,0 +1,1 @@
+More on OOP with python. This time we work with rectangles, ha;

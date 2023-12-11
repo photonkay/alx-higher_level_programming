@@ -5,10 +5,12 @@
 
 import unittest
 import json
+import csv
 import os
+from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
-from models.base import Base
+
 
 class TestBase(unittest.TestCase):
     """Test functions for Base class"""
@@ -97,20 +99,25 @@ class TestBase(unittest.TestCase):
 
     def setUp(self):
         """Create temporary JSON files for testing."""
-        self.rectangle_file = "Rectangle.json"
-        self.square_file = "Square.json"
-        self.invalid_file = "Invalid.json"
+        self.rectangle_json_file = "Rectangle.json"
+        self.square_json_file = "Square.json"
+        self.invalid_json_file = "Invalid.json"
 
-        with open(self.rectangle_file, 'w') as file:
+        with open(self.rectangle_json_file, 'w') as file:
             file.write('[{"id": 1, "width": 5, "height": 10, "x": 2, "y": 3}]')
 
-        with open(self.square_file, 'w') as file:
+        with open(self.square_json_file, 'w') as file:
             file.write('[{"id": 2, "size": 7, "x": 1, "y": 0}]')
 
     def tearDown(self):
-        """Remove temporary JSON files after testing."""
-        files = [self.rectangle_file, self.square_file, self.invalid_file]
-        for file in files:
+        """Clean up temporary files."""
+        json_files = [
+            self.rectangle_json_file,
+            self.square_json_file,
+            self.invalid_json_file
+        ]
+
+        for file in json_files:
             if os.path.exists(file):
                 os.remove(file)
 
@@ -142,7 +149,7 @@ class TestBase(unittest.TestCase):
 
     def test_load_from_invalid_file(self):
         """Test loading from an invalid JSON file."""
-        with open(self.invalid_file, 'w') as file:
+        with open(self.invalid_json_file, 'w') as file:
             file.write('invalid_json_string')
 
         instances = Base.load_from_file()

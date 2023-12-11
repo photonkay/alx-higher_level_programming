@@ -3,7 +3,7 @@
 """Module for the Base class."""
 
 import json
-
+import csv
 
 class Base:
     """The Base class for managing id attribute."""
@@ -93,6 +93,39 @@ class Base:
                 json_string = file.read()
                 dictionaries = cls.from_json_string(json_string)
                 instances = [cls.create(**d) for d in dictionaries]
+                return instances
+        except FileNotFoundError:
+            return []
+    
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Serialize instances to CSV and save to a file.
+
+        Args:
+            list_objs (list): A list of instances.
+
+        Returns:
+            None
+        """
+        filename = f"{cls.__name__}.csv"
+        with open(filename, 'w', newline='') as csvfile:
+            csv_writer = csv.writer(csvfile)
+            for obj in list_objs:
+                attributes = [getattr(obj, attr) for attr in obj.__dict__.keys()]
+                csv_writer.writerow(attributes)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Deserialize instances from a CSV file.
+
+        Returns:
+            list: A list of instances.
+        """
+        filename = f"{cls.__name__}.csv"
+        try:
+            with open(filename, 'r') as csvfile:
+                csv_reader = csv.reader(csvfile)
+                instances = [cls(*map(int, row)) for row in csv_reader]
                 return instances
         except FileNotFoundError:
             return []

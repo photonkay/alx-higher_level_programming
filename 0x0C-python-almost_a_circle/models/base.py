@@ -5,6 +5,7 @@
 import json
 import csv
 
+
 class Base:
     """The Base class for managing id attribute."""
 
@@ -49,7 +50,9 @@ class Base:
         if list_objs is None:
             list_objs = []
         filename = f"{cls.__name__}.json"
-        json_string = cls.to_json_string([obj.to_dictionary() for obj in list_objs])
+        json_string = cls.to_json_string(
+            [obj.to_dictionary() for obj in list_objs]
+        )
         with open(filename, 'w') as file:
             file.write(json_string)
 
@@ -70,7 +73,7 @@ class Base:
 
         Args:
             **dictionary (dict): dict of new attributes
-        
+
         Returns:
             Base, an instance with all attributes set
         """
@@ -80,7 +83,7 @@ class Base:
             dummy_instance = cls(1)
         else:
             raise ValueError("Unsupported class")
-        
+
         dummy_instance.update(**dictionary)
         return dummy_instance
 
@@ -96,7 +99,7 @@ class Base:
                 return instances
         except FileNotFoundError:
             return []
-    
+
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """Serialize instances to CSV and save to a file.
@@ -111,8 +114,8 @@ class Base:
         with open(filename, 'w', newline='') as csvfile:
             csv_writer = csv.writer(csvfile)
             for obj in list_objs:
-                attributes = [getattr(obj, attr) for attr in obj.__dict__.keys()]
-                csv_writer.writerow(attributes)
+                attr = [getattr(obj, attr) for attr in obj.__dict__.keys()]
+                csv_writer.writerow(attr)
 
     @classmethod
     def load_from_file_csv(cls):

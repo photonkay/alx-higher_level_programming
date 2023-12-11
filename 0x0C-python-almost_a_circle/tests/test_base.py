@@ -34,8 +34,14 @@ class TestBase(unittest.TestCase):
             {'id': 2, 'name': 'Bob'},
             {'id': 3, 'name': 'Charlie'}
         ]
-        expected_json_string = '[{"id": 1, "name": "Alice"}, {"id": 2, "name": "Bob"}, {"id": 3, "name": "Charlie"}]'
-        self.assertEqual(Base.to_json_string(list_of_dicts), expected_json_string)
+        expected_json_string = (
+            '[{"id": 1, "name": "Alice"}, '
+            '{"id": 2, "name": "Bob"}, '
+            '{"id": 3, "name": "Charlie"}]'
+        )
+        self.assertEqual(
+            Base.to_json_string(list_of_dicts), expected_json_string
+        )
 
         empty_list = []
         self.assertEqual(Base.to_json_string(empty_list), "[]")
@@ -51,9 +57,9 @@ class TestBase(unittest.TestCase):
         with open('Rectangle.json', 'r') as file:
             file_content = json.load(file)
 
-        expected_json_string = '[{"id": 10, "width": 4, "height": 5, "x": 1, "y": 2},' \
-                               ' {"id": 5, "width": 3, "height": 2, "x": 0, "y": 0}]'
-        expected_objects = json.loads(expected_json_string)
+        expected = '[{"id": 10, "width": 4, "height": 5, "x": 1, "y": 2},' \
+            ' {"id": 5, "width": 3, "height": 2, "x": 0, "y": 0}]'
+        expected_objects = json.loads(expected)
 
         self.assertEqual(file_content, expected_objects)
 
@@ -95,7 +101,6 @@ class TestBase(unittest.TestCase):
         """Test create method with an unsupported class."""
         with self.assertRaises(ValueError):
             Base.create()
-
 
     def setUp(self):
         """Create temporary JSON files for testing."""
